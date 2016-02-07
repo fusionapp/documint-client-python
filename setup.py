@@ -5,7 +5,7 @@ setup(
     version='16.0.0',
     description='Twisted Python clj-documint client implementation',
     author='Jonathan Jacobs',
-    author_email=u'jonathan@jsphere.com',
+    author_email='jonathan@jsphere.com',
     url='https://github.com/fusionapp/txdocumint',
     platforms='any',
     license='MIT',
