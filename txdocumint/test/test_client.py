@@ -170,10 +170,11 @@ class DocumintRequestFactoryTests(TestCase):
         resource = StringStubbingResource(_response_for)
         treq = StubTreq(resource)
         request = documint_request_factory(treq.request)
-        cause = lambda t, r=None, d=None: MatchesStructure(
-            type=Equals(t),
-            reason=Equals(r),
-            description=Equals(d))
+
+        def cause(t, r=None, d=None):
+            return MatchesStructure(type=Equals(t),
+                                    reason=Equals(r),
+                                    description=Equals(d))
         self.assertThat(
             request(b'GET', b'http://example.com/error'),
             failed(
@@ -230,7 +231,6 @@ class ContentTypeTests(TestCase):
             Equals(b'application/json'))
 
 
-
 class SessionTests(TestCase):
     """
     Tests for `txdocumint._client.Session`.
@@ -258,8 +258,9 @@ class SessionTests(TestCase):
                     Equals(b'hello world')))
             return (200,
                     {b'Content-Type': b'application/json'},
-                    json.dumps({u'links':
-                                {u'self': u'http://example.com/stored_object'}}))
+                    json.dumps(
+                        {u'links':
+                         {u'self': u'http://example.com/stored_object'}}))
         resource = StringStubbingResource(_response_for)
         treq = StubTreq(resource)
         session = Session({u'store-content': u'http://example.com/store'},
@@ -306,6 +307,7 @@ class SessionTests(TestCase):
                    {u'result': u'https://example.com/result'}}
         action = {u'action': u'some_action',
                   u'parameters': {u'foo': 42}}
+
         def _response_for(method, url, params, headers, data):
             self.assertThat(method, Equals(b'POST'))
             self.assertThat(
@@ -377,7 +379,6 @@ class CreateSessionTests(TestCase):
                 MatchesStructure(
                     _session_info=Equals(
                         {u'self': u'http://example.com/sessions/1234'}))))
-
 
 
 class GetSessionTests(TestCase):

@@ -101,7 +101,8 @@ def crush(input, compression_profile):
 
     :param unicode input: Document URI.
     :param unicode compression_profile: Compression profile to use, possible
-    choices are: ``text`` (bilevel), ``photo-grey`` (greyscale), ``photo`` (colour).
+    choices are: ``text`` (bilevel), ``photo-grey`` (greyscale), ``photo``
+    (colour).
     """
     return _action(u'crush',
                    {u'input': input,
