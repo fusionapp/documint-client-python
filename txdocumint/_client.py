@@ -73,7 +73,7 @@ def content_type(headers):
     """
     return next(
         iter(headers.getRawHeaders(b'Content-Type', default=[])),
-        b'application/octet-stream')
+        b'application/octet-stream').split(';', 1)[0]
 
 
 class Session(object):
