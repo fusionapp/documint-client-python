@@ -128,18 +128,21 @@ class Session(object):
         d.addCallback(_collect)
         return d
 
-    def perform_action(self, action):
+    def perform_action(self, action_and_parser):
         """
         Perform a Documint action.
 
-        :param dict action: Valid action description. See `txdocumint.actions`
+        :param action_and_parser: Action description and parameters, and a
+        parser for the action result. See `txdocumint.actions`
         for action factories.
         :return: Action response.
         :rtype: Deferred<dict>
         """
+        action, parser = action_and_parser
         d = post_json(self._request,
                       self._session_info[u'perform'],
                       data=json.dumps(action))
+        d.addCallback(parser)
         return d
 
     def delete(self):

@@ -326,7 +326,7 @@ class SessionTests(TestCase):
         session = Session({u'perform': u'http://example.com/perform'},
                           treq.request)
         self.assertThat(
-            session.perform_action(action),
+            session.perform_action((action, lambda x: x)),
             succeeded(Equals(payload)))
 
     def test_delete(self):

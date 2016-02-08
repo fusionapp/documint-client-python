@@ -22,10 +22,12 @@ def render_html(input, base_uri=None):
     :param base_uri: Optional base URI to use when resolving relative URIs.
     :type base_uri: unicode or None
     """
+    def _parse_render(result):
+        return result[u'links'][u'result'][0]
     params = {u'input': input}
     if base_uri is not None:
         params[u'base-uri'] = base_uri
-    return _action(u'render_html', params)
+    return _action(u'render-html', params), _parse_render
 
 
 def concatenate(inputs):
@@ -35,8 +37,10 @@ def concatenate(inputs):
     :param inputs: Document URIs.
     :type inputs: list of unicode
     """
+    def _parse_concat(result):
+        return result[u'links'][u'result'][0]
     return _action(u'concatenate',
-                   {u'inputs': inputs})
+                   {u'inputs': inputs}), _parse_concat
 
 
 def thumbnails(input, breadth):
@@ -46,9 +50,11 @@ def thumbnails(input, breadth):
     :param unicode input: Document URI.
     :param int breadth: Widest part of the thumbnail in pixels.
     """
+    def _parse_thumbnails(result):
+        return result[u'links'][u'results']
     return _action(u'thumbnails',
                    {u'input': input,
-                    u'breadth': breadth})
+                    u'breadth': breadth}), _parse_thumbnails
 
 
 def split(input, page_groups):
@@ -62,9 +68,11 @@ def split(input, page_groups):
     documents: one with pages 1, 3 and 2; the other with pages 4 and 2.
     :type page-groups: list of lists of int
     """
+    def _parse_split(result):
+        return result[u'links'][u'results']
     return _action(u'split',
                    {u'input': input,
-                    u'page-groups': page_groups})
+                    u'page-groups': page_groups}), _parse_split
 
 
 def metadata(input):
@@ -73,8 +81,10 @@ def metadata(input):
 
     :param unicode input: Document URI.
     """
+    def _parse_metadata(result):
+        return result[u'body']
     return _action(u'metadata',
-                   {u'input': input})
+                   {u'input': input}), _parse_metadata
 
 
 def sign(inputs, certificate_alias, location, reason):
@@ -88,11 +98,13 @@ def sign(inputs, certificate_alias, location, reason):
     :param unicode location: Signing location.
     :param unicode reason: Signing reason.
     """
+    def _parse_sign(result):
+        return result[u'links'][u'results']
     return _action(u'sign',
                    {u'inputs': inputs,
                     u'certificate-alias': certificate_alias,
                     u'location': location,
-                    u'reason': reason})
+                    u'reason': reason}), _parse_sign
 
 
 def crush(input, compression_profile):
@@ -104,6 +116,8 @@ def crush(input, compression_profile):
     choices are: ``text`` (bilevel), ``photo-grey`` (greyscale), ``photo``
     (colour).
     """
+    def _parse_crush(result):
+        return result[u'links'][u'result'][0]
     return _action(u'crush',
                    {u'input': input,
-                    u'compression-profile': compression_profile})
+                    u'compression-profile': compression_profile}), _parse_crush
