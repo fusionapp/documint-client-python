@@ -7,6 +7,13 @@ class DocumintErrorCause(object):
         self.reason = reason
         self.description = description
 
+    def __repr__(self):
+        return '<{} type={} reason={} description={}>'.format(
+            self.__class__.__name__,
+            self.type,
+            self.reason,
+            self.description)
+
 
 class DocumintError(RuntimeError):
     """
