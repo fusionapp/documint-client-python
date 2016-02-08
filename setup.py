@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='txdocumint',
-    version='16.0.0',
+    version='16.0.1',
     description='Twisted Python clj-documint client implementation',
     author='Jonathan Jacobs',
     author_email='jonathan@jsphere.com',
