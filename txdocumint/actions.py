@@ -43,18 +43,18 @@ def concatenate(inputs):
                    {u'inputs': inputs}), _parse_concat
 
 
-def thumbnails(input, breadth):
+def thumbnails(input, dpi):
     """
     Generate JPEG thumbnails for a PDF document.
 
     :param unicode input: Document URI.
-    :param int breadth: Widest part of the thumbnail in pixels.
+    :param int dpi: Pixel density of the thumbnail.
     """
     def _parse_thumbnails(result):
         return result[u'links'][u'results']
     return _action(u'thumbnails',
                    {u'input': input,
-                    u'breadth': breadth}), _parse_thumbnails
+                    u'dpi': dpi}), _parse_thumbnails
 
 
 def split(input, page_groups):
