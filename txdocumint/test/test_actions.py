@@ -80,19 +80,19 @@ class ThumbnailsTests(TestCase):
         """
         Construct a ``thumbnails`` action..
         """
-        action, _ = actions.thumbnails(u'http://example.com/input1', 400)
+        action, _ = actions.thumbnails(u'http://example.com/input1', 100)
         self.assertThat(
             action,
             Equals({u'action': u'thumbnails',
                     u'parameters': {
                         u'input': u'http://example.com/input1',
-                        u'breadth': 400}}))
+                        u'dpi': 100}}))
 
     def test_parser(self):
         """
         Parse the output of the ``thumbnails`` action.
         """
-        _, parser = actions.thumbnails(u'http://example.com/input1', 400)
+        _, parser = actions.thumbnails(u'http://example.com/input1', 100)
         result = {u'links': {u'results': [u'http://example.com/output1',
                                           u'http://example.com/output2']}}
         self.assertThat(
