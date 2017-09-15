@@ -221,3 +221,37 @@ class CrushTests(TestCase):
         self.assertThat(
             parser(result),
             Equals(u'http://example.com/output1'))
+
+
+class StampTests(TestCase):
+    """
+    Tests for `txdocumint.actions.stamp`.
+    """
+    def test_action(self):
+        """
+        Construct a ``stamp`` action..
+        """
+        action, _ = actions.stamp(u'http://example.com/watermark',
+                                  [u'http://example.com/input1',
+                                   u'http://example.com/input2'])
+        self.assertThat(
+            action,
+            Equals({u'action': u'stamp',
+                    u'parameters': {
+                        u'watermark': u'http://example.com/watermark',
+                        u'inputs': [u'http://example.com/input1',
+                                    u'http://example.com/input2']}}))
+
+    def test_parser(self):
+        """
+        Parse the output of the ``stamp`` action.
+        """
+        _, parser = actions.stamp(u'http://example.com/watermark',
+                                  [u'http://example.com/input1',
+                                   u'http://example.com/input2'])
+        result = {u'links': {u'results': [u'http://example.com/output1',
+                                          u'http://example.com/output2']}}
+        self.assertThat(
+            parser(result),
+            Equals([u'http://example.com/output1',
+                    u'http://example.com/output2']))
