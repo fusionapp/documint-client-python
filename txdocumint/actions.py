@@ -121,3 +121,18 @@ def crush(input, compression_profile):
     return _action(u'crush',
                    {u'input': input,
                     u'compression-profile': compression_profile}), _parse_crush
+
+
+def stamp(watermark, inputs):
+    """
+    Stamp documents with a watermark document.
+
+    :param unicode watermark: Watermark document URI.
+    :type input: ``List[unicode]``
+    :param input: Document URIs.
+    """
+    def _parse_stamps(result):
+        return result[u'links'][u'results']
+    return _action(u'stamp',
+                   {u'watermark': watermark,
+                    u'inputs': inputs}), _parse_stamps
