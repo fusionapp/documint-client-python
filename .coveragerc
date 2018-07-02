@@ -2,15 +2,15 @@
 branch = True
 source = txdocumint
 omit =
-    txdocumint/_version.py
+    src/txdocumint/_version.py
     versioneer.py
 
 [paths]
 source =
-    txdocumint
+    src/txdocumint
     .tox/*/lib/python*/site-packages/txdocumint
     .tox/*/site-packages/txdocumint
 
 [report]
 omit =
-    txdocumint/_version.py
+    src/txdocumint/_version.py

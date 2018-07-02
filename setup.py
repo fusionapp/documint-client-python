@@ -1,7 +1,7 @@
 import os
 import codecs
 import versioneer
-from setuptools import setup
+from setuptools import setup, find_packages
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,21 +17,28 @@ setup(
     name='txdocumint',
     description='Twisted Python clj-documint client implementation',
     license='MIT',
+    url='https://github.com/fusionapp/txdocumint',
     author='Jonathan Jacobs',
     author_email='jonathan@jsphere.com',
-    url='https://github.com/fusionapp/txdocumint',
-    platforms='any',
+    maintainer='Jonathan Jacobs',
+    maintainer_email='jonathan@jsphere.com',
+    include_package_data=True,
     long_description=read('README.rst'),
-    packages=['txdocumint', 'txdocumint.test'],
-    test_suite='txdocumint',
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     zip_safe=False,
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Topic :: Software Development :: Libraries :: Python Modules',
         'Intended Audience :: Developers',
+        'Natural Language :: English',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     install_requires=[
         'Twisted[tls]>=15.5.0',
