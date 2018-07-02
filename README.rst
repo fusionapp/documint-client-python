@@ -1,6 +1,6 @@
-=========
+==========
 txdocumint
-=========
+==========
 
 Twisted Python client for `clj-documint <https://github.com/fusionapp/clj-documint>`.
 
