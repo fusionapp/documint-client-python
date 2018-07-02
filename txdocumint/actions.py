@@ -30,6 +30,22 @@ def render_html(input, base_uri=None):
     return _action(u'render-html', params), _parse_render
 
 
+def render_legacy_html(input, base_uri=None):
+    """
+    Render a legacy HTML document to a PDF document.
+
+    :param unicode input: URI to the HTML content to render.
+    :param base_uri: Optional base URI to use when resolving relative URIs.
+    :type base_uri: unicode or None
+    """
+    def _parse_render(result):
+        return result[u'links'][u'result'][0]
+    params = {u'input': input}
+    if base_uri is not None:
+        params[u'base-uri'] = base_uri
+    return _action(u'render-legacy-html', params), _parse_render
+
+
 def concatenate(inputs):
     """
     Concatenate several PDF documents together.

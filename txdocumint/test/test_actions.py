@@ -43,6 +43,45 @@ class RenderHTMLTests(TestCase):
             Equals(u'http://example.com/output1'))
 
 
+class RenderLegacyHTMLTests(TestCase):
+    """
+    Tests for `txdocumint.actions.render_legacy_html`.
+    """
+    def test_no_base_uri(self):
+        """
+        Construct a ``render-legacy-html`` action without a base URI.
+        """
+        action, _ = actions.render_legacy_html(u'http://example.com/input1')
+        self.assertThat(
+            action,
+            Equals({u'action': u'render-legacy-html',
+                    u'parameters': {
+                        u'input': u'http://example.com/input1'}}))
+
+    def test_base_uri(self):
+        """
+        Construct a ``render-legacy-html`` action with a base URI.
+        """
+        action, _ = actions.render_legacy_html(u'http://example.com/input1',
+                                               u'http://example.com/')
+        self.assertThat(
+            action,
+            Equals({u'action': u'render-legacy-html',
+                    u'parameters': {
+                        u'input': u'http://example.com/input1',
+                        u'base-uri': u'http://example.com/'}}))
+
+    def test_parser(self):
+        """
+        Parse the output of the ``render-legacy-html`` action.
+        """
+        _, parser = actions.render_legacy_html(u'http://example.com/input1')
+        result = {u'links': {u'result': [u'http://example.com/output1']}}
+        self.assertThat(
+            parser(result),
+            Equals(u'http://example.com/output1'))
+
+
 class ConcatenateTests(TestCase):
     """
     Tests for `txdocumint.actions.concatenate`.
