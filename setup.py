@@ -34,10 +34,10 @@ setup(
         'Programming Language :: Python',
     ],
     install_requires=[
-        'twisted>=15.5.0',
+        'Twisted[tls]>=15.5.0',
         'treq>=15.1.0',
     ],
     extras_require={
-        'dev': ['pytest>=2.7.1', 'testtools>=2.0.0'],
+        'test': ['pytest>=2.7.1', 'testtools>=2.0.0'],
     },
 )

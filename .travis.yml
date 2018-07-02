@@ -1,28 +1,35 @@
 language: python
 python: 2.7
 sudo: false
-cache:
-    directories:
-        - $HOME/.cache/pip
+cache: pip
 branches:
-    only:
-        - master
+  only:
+    - master
 
-env:
-    - TOX_ENV=py27
-    - TOX_ENV=pep8
+matrix:
+  include:
+  - python: 2.7
+    env: TOXENV=py27-twlatest
+  - python: pypy
+    env: TOXENV=pypy-twlatest
+  - python: 2.7
+    env: TOXENV=flake8
 
 install:
+  # Upgrade packaging tools separately, so that other installations are
+  # performed with the upgraded tools.
+  - pip install -U pip setuptools wheel
   - pip install codecov coverage tox
   - python setup.py --version
   - pip install -e.[dev]
 
 script:
-  - coverage run --branch --source txdocumint $(type -p py.test) txdocumint
-  - coverage report -m
-  - tox -e "${TOX_ENV}"
+  - tox
 
 after_success:
+  # Codecov needs combined coverage, and having the raw report in the test
+  # output can be useful.
+  - tox -e coverage-report
   - codecov
 
 notifications:

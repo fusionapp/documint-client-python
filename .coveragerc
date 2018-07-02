@@ -1,0 +1,16 @@
+[run]
+branch = True
+source = txdocumint
+omit =
+    txdocumint/_version.py
+    versioneer.py
+
+[paths]
+source =
+    txdocumint
+    .tox/*/lib/python*/site-packages/txdocumint
+    .tox/*/site-packages/txdocumint
+
+[report]
+omit =
+    txdocumint/_version.py
