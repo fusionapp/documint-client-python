@@ -1,5 +1,4 @@
 language: python
-python: 2.7
 sudo: false
 cache: pip
 branches:
@@ -12,6 +11,14 @@ matrix:
     env: TOXENV=py27-twlatest
   - python: pypy
     env: TOXENV=pypy-twlatest
+  - python: 2.7
+    env: TOXENV=py27-twtrunk
+  - python: pypy
+    env: TOXENV=pypy-twtrunk
+  - python: 2.7
+    env: TOXENV=py27-twlowest
+  - python: pypy
+    env: TOXENV=pypy-twlowest
   - python: 2.7
     env: TOXENV=flake8
 
